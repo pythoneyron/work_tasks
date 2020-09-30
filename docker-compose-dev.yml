@@ -1,0 +1,22 @@
+version: "3.8"
+
+services:
+
+  postgres:
+    restart: always
+    image: postgres
+    container_name: work_tasks_postgres
+    env_file: .env
+
+  web:
+    restart: always
+    build: .
+    container_name: work_tasks_web
+    env_file: .env
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./src:/src
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgres
