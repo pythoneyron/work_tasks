@@ -9,7 +9,7 @@ def login_required(function=None, redirect_field_name=REDIRECT_FIELD_NAME, login
     """ Права для авторизированного пользователя """
     actual_decorator = user_passes_test(
         lambda u: u.is_authenticated,
-        login_url='/auth/login',
+        login_url='/accounts/login',
         redirect_field_name=redirect_field_name
     )
     if function:
@@ -21,7 +21,7 @@ def manager_rights(function=None, redirect_field_name=REDIRECT_FIELD_NAME, login
     """ Права для Менеджера """
     actual_decorator = user_passes_test(
         lambda u: u.is_authenticated and u.role == RoleUser.Manager,
-        login_url='/auth/login',
+        login_url='/accounts/login',
         redirect_field_name=redirect_field_name,
     )
     if function:
@@ -33,7 +33,7 @@ def employee_rights(function=None, redirect_field_name=REDIRECT_FIELD_NAME, logi
     """ Права для Сотрудника """
     actual_decorator = user_passes_test(
         lambda u: u.is_authenticated and u.role in [RoleUser.Manager, RoleUser.Employee],
-        login_url='/auth/login',
+        login_url='/accounts/login',
         redirect_field_name=redirect_field_name,
     )
     if function:

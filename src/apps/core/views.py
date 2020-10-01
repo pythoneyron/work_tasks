@@ -10,7 +10,7 @@ class Home(TemplateView):
     def dispatch(self, request, *args, **kwargs):
         user = request.user
         if user.role == RoleUser.Manager:
-            return redirect('accounts:users')
+            return redirect('accounts:accounts')
 
         elif user.role == RoleUser.Employee:
             return redirect('tasks:tasks')
